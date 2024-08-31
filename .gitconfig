@@ -1,6 +1,6 @@
 [user]
-	email = antonio@torreaobraz.com
-	name = atbraz
+	email = %%GIT_EMAIL%%
+	name = %%GIT_NAME%%
 
 [core]
     pager = delta
