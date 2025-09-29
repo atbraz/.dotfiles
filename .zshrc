@@ -34,7 +34,7 @@ compinit
 
 # Completion styling
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
-zstyle :compinstall filename '/home/abraz/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
@@ -123,7 +123,6 @@ function l {
         -a \
         -l \
         -F \
-        -@ \
         --git \
         --git-repos \
         --group-directories-first \
@@ -146,7 +145,11 @@ bindkey '^F' tmux_sessionizer_widget
 
 # Aliases
 alias lt="l --tree"
-alias clip="clip.exe"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    alias clip="pbcopy"
+else
+    alias clip="clip.exe"
+fi
 alias c.="code ."
 alias v="nvim"
 alias v.="nvim ."
@@ -194,10 +197,15 @@ function check_ssh_agent() {
 #   - the correct directories to the PATH
 #   - auto-completion for the opam binary
 # This section can be safely removed at any time if needed.
-[[ ! -r '/home/abraz/.opam/opam-init/init.zsh' ]] || source '/home/abraz/.opam/opam-init/init.zsh' >/dev/null 2>/dev/null
+[[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh" >/dev/null 2>/dev/null
 # END opam configuration
-export PATH="$PATH:/opt/mssql-tools18/bin"
 
-. "$HOME/.atuin/bin/env"
+eval "$(starship init zsh)"
 
-eval "$(atuin init zsh --disable-up-arrow)"
+PATH="/home/abraz/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/abraz/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/abraz/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/abraz/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/abraz/perl5"; export PERL_MM_OPT;
+
+. "$HOME/.local/share/../bin/env"
