@@ -525,7 +525,7 @@ useDefault = true
 [[rules]]
 id = "dotfiles-personal-info"
 description = "Personal information in dotfiles"
-regex = '''antonio@torreaobraz\.com|%%HOME%%|abraz@absoluteinvest'''
+regex = '''antonio@torreaobraz\.com|/Users/antonio|abraz@absoluteinvest'''
 [rules.allowlist]
 paths = ['''^\.git/''', '''^scripts/hooks/''']
 ```
